@@ -1,0 +1,22 @@
+ul{
+    margin-top: 40px;
+    list-style-type:none;
+    display: flex;
+    flex-direction: row;
+    justify-content:left;
+    padding-top: 10px;
+}
+li{
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-left: 30px;
+
+}
+nav{
+    background-color: rgb(203, 65, 15);
+    height:50px;
+    width:90%;
+    margin-left:120px;
+    margin-top:20px;
+}

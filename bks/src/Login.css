@@ -1,0 +1,20 @@
+#mainLogin{
+    background-color:rgba(230, 60, 14, 0.872);
+    text-align: center;
+    width:500px;
+    height: 400px;
+    margin-left:650px;
+    margin-top: 130px;
+    border-radius: 20px;
+}
+.Loginpassword,.Loginemail{
+    margin:10px;
+    border-style: outset;
+    width:40%;
+    height: 30px;
+
+}
+.loginButton{
+    color:black;
+    font-size: 25px;
+}
