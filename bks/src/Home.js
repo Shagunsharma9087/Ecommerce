@@ -51,7 +51,7 @@ function Home()
             </div>
             <div>
             <input type="text" id="search" class="Loginpassword" placeholder="Enter the product..." onChange={(e)=>{setType(e.target.value)}}></input>
-                <button type="submit" onClick={fetchData}>Search</button>
+                <button type="submit" id="searchbutton" onClick={fetchData}>Search</button>
             </div>
              <div id="cartandproduct">
              <div id="products">
