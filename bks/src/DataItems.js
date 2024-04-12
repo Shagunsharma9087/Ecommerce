@@ -2,12 +2,13 @@ import { useState } from "react";
 
 function DataItems({Cart,setCart,item,Cartset})
 {
-    const [Quantity,setQuantity]=useState(0);
+    const [Quantity,setQuantity]=useState(1);
     function addCart(e)
     {
-        console.log(Quantity);
-        Cart.push({"ProductId":item._id, "Product":item.title,"Quantity":Quantity,"price":item.price})
-        Cartset(Cart);
+    
+            const updatedCart = [...Cart, {"ProductId": item._id, "Product": item.title, "Quantity": Quantity, "price": item.price}];
+            Cartset(updatedCart);
+        
         console.log("hello");
     }
     return (

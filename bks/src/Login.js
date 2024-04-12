@@ -18,8 +18,9 @@ function Login()
             if(result.data.email===email)
             {
              navigate('/Home',{state:{
+                custmerId:result.data._id,
                 email:email,
-                id:result.data._id
+                role:result.data.role
              }})
             }
             else{

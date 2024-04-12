@@ -3,7 +3,8 @@ ul{
     list-style-type:none;
     display: flex;
     flex-direction: row;
-    justify-content:left;
+    justify-content:right;
+    margin-right: 100px;
     padding-top: 10px;
 }
 li{

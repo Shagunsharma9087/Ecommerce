@@ -2,8 +2,41 @@ const mongoose = require("mongoose");
 const OrderModel=require('../Models/orders');
 const ProductModel = require("../Models/product");
 const CustomerInfoModel = require("../Models/customerinfo");
+const {jwtAuthMiddleware,generateToken}=require('../jwt');
+const placeOrder=async(req,res)=>{
+    const {CustomerId,product,totalprice,Address}=req.body;
+    console.log("hello");
+    try{
+        const user = await CustomerInfoModel.findById(CustomerId);
+        if (!user) {
+            return res.status(401).json({
+              message: "User not found",
+            });
+          }
+        const task= await OrderModel.create({CustomerId:CustomerId,product:product,totalprice:totalprice,Address:Address})
+        await user.addOrder(task._id);
+         res.status(200).json(task);
+     }
+     catch(error)
+     {
+         res.status(400).json({ error: error.message });
+     }
+}
+const getOneemailinfo= async(req,res)=>
+{
+    const {email}=req.body;
+    try{
+        const user =await CustomerInfoModel.find({email:email});
+        res.status(200).json(user);
+
+    }
+    catch(error){
+        res.status(400).json({error:error.message})
+    }
+}
 const  getOneType=async(req,res)=>{
     const {type}=req.body;
+    console.log("helotype",type)
     try{
         const task=await ProductModel.find({type:type});
         res.status(200).json(task);
@@ -14,7 +47,6 @@ const  getOneType=async(req,res)=>{
     }
 }
 const getallproduct=async (req,res)=>{
-    const {title}=req.body;
     try {
         console.log("hello")
         const task = await ProductModel.find({});
@@ -25,6 +57,7 @@ const getallproduct=async (req,res)=>{
 }
 const productadd= async(req,res)=>{
     const {title,type,description,price,rating} = req.body;
+    windows.alert("hello");
     try{
        const task= await ProductModel.create({title,type,description,price,rating})
         res.status(200).json(task);
@@ -38,12 +71,18 @@ const login=async (req,res)=>{
     const {email,password}=req.body;
     console.log(req.body);
     try{
-        const user= await CustomerInfoModel.findOne({email:email})
+        const user= await CustomerInfoModel.findOne({email:email});
         if(user)
         {
-            if(user.password===password)
+            if(user.password==password)
             {
-                res.json(user)
+                const payload={
+                    id:user.id,
+                    username:user.username
+                }
+                const token=generateToken(payload,"1234");
+                console.log("token is",token);
+                res.json(user);
             }
             else
             {
@@ -63,7 +102,14 @@ const register= async (req,res)=>{
     const { email,username ,password } = req.body;
     try{
        const task= await CustomerInfoModel.create({email,username:username,password})
-        res.status(200).json(task);
+       const payload={
+        id:task.id,
+        username:task.username
+       }
+       console.log(JSON.stringify(payload))
+       const token=generateToken(payload);
+       console.log("token is",token);
+        res.status(200).json({task:task,token:token});
     }
     catch(error)
     {
@@ -71,4 +117,4 @@ const register= async (req,res)=>{
     }
 
 }
-module.exports = {register,login,productadd,getallproduct,getOneType};
+module.exports = {register,login,productadd,getallproduct,getOneType,getOneemailinfo,placeOrder};

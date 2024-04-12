@@ -23,7 +23,15 @@ const CustomerSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  role:{
+    type:String,
+    default: "regularuser",
   }
 });
+CustomerSchema.methods.addOrder = function (OrderId) {
+  this.orders.push(OrderId);
+  return this.save();
+};
 const CustomerModel=mongoose.model("customerinfo",CustomerSchema)
 module.exports=CustomerModel

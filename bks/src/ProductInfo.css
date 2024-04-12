@@ -1,0 +1,33 @@
+#mainCart{
+    text-align: left;
+    width:700;
+    height:50px;
+}
+#cartmenu{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+#total{
+    text-align: right;
+    margin-right: 70px;
+    font-size: 30px;
+}
+#placeorderbutton{
+    text-align: right;
+    margin-right: 230px;
+}
+#placeorderbutton >button
+{
+    width: 90px;
+    height:40px;
+}
+#productaddlink
+{
+    margin-top:50px;
+    font-size: 20px;
+    height:40px;
+    width: 30%;
+    text-align: right;
+    margin-left: 1000px;
+}

@@ -7,9 +7,6 @@ function Navigation()
             <nav>
                 <ul >
                     <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
                         <Link to="/Register">SignIn</Link>
                     </li>
                     <li>
